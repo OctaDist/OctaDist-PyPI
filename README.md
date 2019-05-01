@@ -5,7 +5,7 @@
 [![Code size](https://img.shields.io/github/languages/code-size/OctaDist/OctaDist-PyPI.svg)](https://github.com/OctaDist/OctaDist-PyPI)
 [![Repo size](https://img.shields.io/github/repo-size/OctaDist/OctaDist-PyPI.svg)](https://github.com/OctaDist/OctaDist-PyPI)
 
-## OctaDist
+## OctaDist-PyPI
 Octahedral distortion calculator: A program for determining the structural distortion of the octahedral complexes. https://octadist.github.io/
 
 <p align="center">
