@@ -1,0 +1,25 @@
+language: python
+sudo: yes
+dist: xenial
+
+branches:
+  only:
+    - master
+
+python:
+  - "3.7"  # 3.7 development branch
+  
+install:
+  - pip install pyinstaller
+  - pip install numpy
+  - pip install scipy
+  - pip install matplotlib
+
+script:
+  - cd example-py
+  - python example-1.py
+  - python example-2.py
+  - python example-3.py
+  - python example-4.py
+
+  
