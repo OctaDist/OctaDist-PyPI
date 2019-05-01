@@ -17,9 +17,8 @@ install:
 
 script:
   - cd example-py
-  - python example-1.py
-  - python example-2.py
-  - python example-3.py
-  - python example-4.py
+  - python example_1.py
+  - python example_2.py
+  - python example_3.py
+  - python example_4.py
 
-  
