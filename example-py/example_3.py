@@ -5,7 +5,7 @@ from octadist import coord, calc
 #############
 
 # Open and read input file
-file = r"C:\Users\Nutt\Desktop\OctaDist-TestFile\Fe\Multiple-metals.xyz"
+file = r"../example-input/Multiple-metals.xyz"
 
 # If complex contains metal center more than one, you can specify the index of metal of interest.
 # For example, this complex contains three metal atoms: Fe, Ru, and Rd. I add second argument "2"

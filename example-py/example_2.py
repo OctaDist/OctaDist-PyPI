@@ -5,7 +5,7 @@ from octadist import coord, calc
 #############
 
 # Open and read input file
-file = r"C:\Users\Nutt\Desktop\OctaDist-TestFile\Fe\Multiple-metals.xyz"
+file = r"../example-input/Multiple-metals.xyz"
 
 # Extract atomic labels and coordinates of octahedral structure from metal complex
 atom, coor = coord.extract_octa(file)

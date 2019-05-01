@@ -5,7 +5,7 @@ from octadist import coord, draw
 #############
 
 # Open and read input file
-file = r"C:\Users\Nutt\Desktop\OctaDist-TestFile\Fe\Multiple-metals.xyz"
+file = r"../example-input/Multiple-metals.xyz"
 
 # Graphical display for octahedral complex
 full_atom, full_coor = coord.get_coord(file)
