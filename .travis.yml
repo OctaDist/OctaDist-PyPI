@@ -10,10 +10,7 @@ python:
   - "3.7"  # 3.7 development branch
   
 install:
-  - pip install pyinstaller
-  - pip install numpy
-  - pip install scipy
-  - pip install matplotlib
+  - pip install octadist
 
 script:
   - cd example-py
