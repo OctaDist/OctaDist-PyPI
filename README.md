@@ -1,7 +1,9 @@
-[![Travis-CI Test](https://img.shields.io/travis/OctaDist/OctaDist/master.svg
-)](https://travis-ci.org/OctaDist/OctaDist)
+[![Travis-CI Test](https://img.shields.io/travis/OctaDist/OctaDist-PyPI/master.svg
+)](https://travis-ci.org/OctaDist/OctaDist-PyPI)
+[![Github release](https://img.shields.io/github/release/OctaDist/OctaDist-PyPI.svg
+)](https://github.com/OctaDist/OctaDist/releases)
 [![Code size](https://img.shields.io/github/languages/code-size/OctaDist/OctaDist-PyPI.svg)](https://github.com/OctaDist/OctaDist-PyPI)
-[![Repo size](https://img.shields.io/github/repo-size/OctaDist/OctaDist-PI.svg)](https://github.com/OctaDist/OctaDist-PyPI)
+[![Repo size](https://img.shields.io/github/repo-size/OctaDist/OctaDist-PyPI.svg)](https://github.com/OctaDist/OctaDist-PyPI)
 
 ## OctaDist
 Octahedral distortion calculator: A program for determining the structural distortion of the octahedral complexes. https://octadist.github.io/
@@ -72,8 +74,13 @@ Sigma = 47.926528379270124
 Theta = 122.688972774546
 ```
 
-## Citation
-Please cite this project when you have used OctaDist for scientific publication.
+Please cite this project when you use OctaDist for scientific publication.
+
+```
+OctaDist - A program for determining the structural distortion of the octahedral complexes.
+https://octadist.github.io
+```
+
 
 ## Bug report
 If you found issues in OctaDist, please report us at [here](https://github.com/OctaDist/OctaDist/issues).
