@@ -1,7 +1,7 @@
 [![Travis-CI Test](https://img.shields.io/travis/OctaDist/OctaDist/master.svg
 )](https://travis-ci.org/OctaDist/OctaDist)
-[![Code size](https://img.shields.io/github/languages/code-size/OctaDist/OctaDist.svg)](https://github.com/OctaDist/OctaDist)
-[![Repo size](https://img.shields.io/github/repo-size/OctaDist/OctaDist.svg)](https://github.com/OctaDist/OctaDist)
+[![Code size](https://img.shields.io/github/languages/code-size/OctaDist/OctaDist-PyPI.svg)](https://github.com/OctaDist/OctaDist-PyPI)
+[![Repo size](https://img.shields.io/github/repo-size/OctaDist/OctaDist-PI.svg)](https://github.com/OctaDist/OctaDist-PyPI)
 
 ## OctaDist
 Octahedral distortion calculator: A program for determining the structural distortion of the octahedral complexes. https://octadist.github.io/
