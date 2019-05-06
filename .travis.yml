@@ -18,4 +18,5 @@ script:
   - python example_2.py
   - python example_3.py
   - python example_4.py
+  - python example_5.py
 
