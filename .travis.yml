@@ -12,7 +12,7 @@ python:
 install:
   # - pip install octadist
   # - pip install -i https://test.pypi.org/simple/ octadist
-  - python -m pip install --index-url https://test.pypi.org/simple/ octadist
+  - pip install --index-url https://test.pypi.org/simple/ octadist==2.5.2.2
 
 script:
   - cd example-py
