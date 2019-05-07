@@ -1,9 +1,22 @@
-[![Travis-CI Test](https://img.shields.io/travis/OctaDist/OctaDist-PyPI/master.svg
-)](https://travis-ci.org/OctaDist/OctaDist-PyPI)
-![Python version](https://img.shields.io/pypi/pyversions/octadist.svg)
-![Python Wheel](https://img.shields.io/pypi/wheel/octadist.svg)
-![Code size](https://img.shields.io/github/languages/code-size/OctaDist/OctaDist-PyPI.svg)
-![Repo size](https://img.shields.io/github/repo-size/OctaDist/OctaDist-PyPI.svg)
+![Python version][Py-ver-badge]
+[![PyPI-Server][PyPI-badge]][PyPI-link]
+[![Conda-Server][Conda-badge]][Conda-link]
+![Python Wheel][Py-wheel-badge]
+[![Travis-CI Test][Travis-badge]][Travis-link]
+![Code size][Code-size]
+![Repo size][Repo-size]
+
+
+[Py-ver-badge]: https://img.shields.io/pypi/pyversions/octadist.svg
+[PyPI-badge]: https://img.shields.io/pypi/v/octadist.svg
+[PyPI-link]: https://pypi.org/project/octadist/
+[Conda-badge]: https://anaconda.org/rangsiman/octadist/badges/version.svg
+[Conda-link]: https://anaconda.org/rangsiman/octadist
+[Py-wheel-badge]: https://img.shields.io/pypi/wheel/octadist.svg
+[Travis-badge]: https://img.shields.io/travis/OctaDist/OctaDist-PyPI/master.svg
+[Travis-link]: https://travis-ci.org/OctaDist/OctaDist-PyPI
+[Code-size]: https://img.shields.io/github/languages/code-size/OctaDist/OctaDist-PyPI.svg
+[Repo-size]: https://img.shields.io/github/repo-size/OctaDist/OctaDist-PyPI.svg
 
 ## OctaDist
 
