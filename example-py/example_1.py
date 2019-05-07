@@ -3,7 +3,6 @@
 ###################################################
 
 from octadist import calc
-import numpy
 
 # The first atom must be metal center atom of octahedral structure.
 # If not, please see example_2.py for how to handle this issue.

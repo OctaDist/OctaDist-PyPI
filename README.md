@@ -1,7 +1,9 @@
-[![Travis-CI Test](https://img.shields.io/travis/OctaDist/OctaDist/master.svg
-)](https://travis-ci.org/OctaDist/OctaDist)
-[![Code size](https://img.shields.io/github/languages/code-size/OctaDist/OctaDist.svg)](https://github.com/OctaDist/OctaDist)
-[![Repo size](https://img.shields.io/github/repo-size/OctaDist/OctaDist.svg)](https://github.com/OctaDist/OctaDist)
+[![Travis-CI Test](https://img.shields.io/travis/OctaDist/OctaDist-PyPI/master.svg
+)](https://travis-ci.org/OctaDist/OctaDist-PyPI)
+![Python version](https://img.shields.io/pypi/pyversions/octadist.svg)
+![Python Wheel](https://img.shields.io/pypi/wheel/octadist.svg)
+![Code size](https://img.shields.io/github/languages/code-size/OctaDist/OctaDist-PyPI.svg)
+![Repo size](https://img.shields.io/github/repo-size/OctaDist/OctaDist-PyPI.svg)
 
 ## OctaDist
 
@@ -26,7 +28,7 @@ With the abilities of OctaDist, you can:
 - identify the type of octahedral coordination complexes.
 - compute octahedral distortion parameters.
 - display 3D molecule and other stuff.
-- implement in your or other other program easily.
+- implement its functionality in your or other program.
 
 
 ## Getting started

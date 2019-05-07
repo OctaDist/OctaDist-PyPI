@@ -10,7 +10,8 @@ python:
   - "3.7"  # 3.7 development branch
   
 install:
-  - pip install octadist
+  # - pip install octadist
+  - pip install -i https://test.pypi.org/simple/ octadist
 
 script:
   - cd example-py
@@ -19,4 +20,3 @@ script:
   - python example_3.py
   - python example_4.py
   - python example_5.py
-
