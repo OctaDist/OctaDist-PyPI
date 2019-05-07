@@ -5,12 +5,12 @@
 
 import setuptools
 
-__version__ = "2.5.5"
+__version__ = "2.5.2.1"
 
 with open("README.md", "r", encoding="utf-8") as f:
     long_description = f.read()
 
-description = "Octahedral distortion calculator for coordination complexes"
+description = "OctaDist: A tool for calculating distortion parameters in coordination complexes."
 
 setuptools.setup(
     name="octadist",

@@ -1,30 +1,58 @@
-"""
-OctaDist  Copyright (C) 2019  Rangsiman Ketkaew et al.
+# OctaDist  Copyright (C) 2019  Rangsiman Ketkaew et al.
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
 """
-
-from octadist import plane, projection, linear
+calc: Calculate structural and distortion parameters
+"""
 
 import numpy as np
 
+from octadist.src import linear, projection
 
-def calc_d_mean(c_octa):
+
+def calc_d_bond(c_octa):
+    """Calculate metal-ligand bond distance and return value in Angstrom
+
+    :param c_octa: atomic coordinates of octahedral structure
+    :type c_octa: list, array, tuple
+    :return bond_dist: individual metal-ligand bond distance
+    :rtype bond_dist: list
     """
-    Calculate mean distance parameter (in Angstrom)
+    c_octa = np.asarray(c_octa)
 
-    :param c_octa: array - coordinate of octahedral structure
-
-    :return d_mean: float - mean distance
-    :return bond_dist: list - individual bond distance
-    """
     bond_dist = []
     for i in range(1, 7):
-        distance = linear.distance_between(c_octa[0], c_octa[i])
+        distance = linear.distance_bwn_points(c_octa[0], c_octa[i])
         bond_dist.append(distance)
+
+    return bond_dist
+
+
+def calc_d_mean(c_octa):
+    """Calculate mean distance parameter and return value in Angstrom
+
+    :param c_octa: atomic coordinates of octahedral structure
+    :type c_octa: list, array, tuple
+    :return d_mean: mean metal-ligand bond distance
+    :rtype d_mean: int, float
+    """
+    c_octa = np.asarray(c_octa)
+
+    # calculate bond distances
+    bond_dist = calc_d_bond(c_octa)
 
     i = 0
     sum_distance = 0
@@ -34,12 +62,11 @@ def calc_d_mean(c_octa):
 
     d_mean = sum_distance / 6
 
-    return d_mean, bond_dist
+    return d_mean
 
 
-def calc_zeta(d_mean, bond_dist):
-    """
-    Calculate Zeta parameter (in Angstrom)
+def calc_zeta(c_octa):
+    """Calculate Zeta parameter and return value in Angstrom
 
          6
     ζ = sum(|dist_i - d_mean|)
@@ -47,11 +74,17 @@ def calc_zeta(d_mean, bond_dist):
 
     Ref: Phys. Rev. B 85, 064114
 
-    :param d_mean: float - mean distance
-
-    :param bond_dist: list - individual bond distance
-    :return zeta: float - zeta parameter in degree
+    :param c_octa: atomic coordinates of octahedral structure
+    :type c_octa: list, array, tuple
+    :return zeta: Zeta parameter
+    :rtype zeta: int, float
     """
+    c_octa = np.asarray(c_octa)
+
+    # calculate bond distances and mean distance
+    bond_dist = calc_d_bond(c_octa)
+    d_mean = calc_d_mean(c_octa)
+
     diff_dist = []
     for i in range(6):
         diff_dist.append(abs(bond_dist[i] - d_mean))
@@ -61,22 +94,27 @@ def calc_zeta(d_mean, bond_dist):
     return zeta
 
 
-def calc_delta(d_mean, bond_dist):
-    """
-    Calculate Delta parameter
-                               2
-          1         / d_i - d \
-    Δ =  --- * sum | -------- |
-          6        \    d    /
+def calc_delta(c_octa):
+    """Calculate Delta parameter (Tilting distortion parameter)
+
+          1
+    Δ =  ---*sum((d_i - d)/d)^2
+          6
 
     where d_i is individual M-X distance and d is mean M-X distance.
     Ref: DOI: 10.1107/S0108768103026661  Acta Cryst. (2004). B60, 10-20
 
-    :param d_mean: float - mean distance
-    :param bond_dist: list - individual bond distance
-
-    :return delta: float - delta parameter (unitless quantity)
+    :param c_octa: atomic coordinates of octahedral structure
+    :type c_octa: list, array, tuple
+    :return delta: Delta parameter
+    :rtype delta: int, float
     """
+    c_octa = np.asarray(c_octa)
+
+    # calculate bond distances and mean distance
+    bond_dist = calc_d_bond(c_octa)
+    d_mean = calc_d_mean(c_octa)
+
     delta = 0
     for i in range(6):
         diff_dist = (bond_dist[i] - d_mean) / d_mean
@@ -85,9 +123,40 @@ def calc_delta(d_mean, bond_dist):
     return delta
 
 
-def calc_sigma(c_octa):
+def calc_bond_angle(c_octa):
+    """Calculate 12 cis and 3 trans unique angles in octahedral structure
+
+    :param c_octa: atomic coordinates of octahedral structure
+    :type c_octa: list, array, tuple
+    :return cis_angle: list of 12 cis angles
+    :rtype cis_angle: list
+    :return trans_angle: list of 3 trans angles
+    :rtype trans_angle: list
     """
-    Calculate Sigma parameter
+    c_octa = np.asarray(c_octa)
+
+    all_angle = []
+    k = 1
+    for i in range(1, 7):
+        for j in range(i + 1, 7):
+            angle = linear.angle_btw_3points(c_octa[0], c_octa[i], c_octa[j])
+            all_angle.append(angle)
+            k += 1
+
+    # Sort the angle from the lowest to the highest
+    all_angle.sort()
+
+    # Get cis angles
+    cis_angle = [all_angle[i] for i in range(12)]
+
+    # Get trans angles
+    trans_angle = [all_angle[i] for i in range(12, 15)]
+
+    return cis_angle, trans_angle
+
+
+def calc_sigma(c_octa):
+    """Calculate Sigma parameter and return value in degree
 
           12
     Σ = sigma < 90 - angle_i >
@@ -96,37 +165,24 @@ def calc_sigma(c_octa):
     where angle_i in an unique cis angle
     Ref: J. K. McCusker et al. Inorg. Chem. 1996, 35, 2100.
 
-    :param c_octa: array - coordinate of octahedral structure
-
-    :return sigma: float - sigma parameter in degree
-    :return angle_sigma: list - list of 12 unique angles
+    :param c_octa: atomic coordinates of octahedral structure
+    :type c_octa: list, array, tuple
+    :return sigma: Sigma parameter
+    :rtype sigma: int, float
     """
-    angle_sigma = []
-    k = 1
-    for i in range(1, 7):
-        for j in range(i + 1, 7):
-            angle = linear.angle_btw_3vec(c_octa[0], c_octa[i], c_octa[j])
-            angle_sigma.append(angle)
-            k += 1
+    c_octa = np.asarray(c_octa)
 
-    # Sort the angle from the lowest to the highest
-    angle_sigma.sort()
-
-    # Remove 3 trans angles (last three angles)
-    angle_sigma = angle_sigma[:-3]
-
-    max_angle = angle_sigma[-1]
+    cis_angle, _ = calc_bond_angle(c_octa)
 
     sigma = 0
-    for i in range(len(angle_sigma)):
-        sigma = abs(90.0 - angle_sigma[i]) + sigma
+    for i in range(len(cis_angle)):
+        sigma = abs(90.0 - cis_angle[i]) + sigma
 
-    return sigma, max_angle
+    return sigma
 
 
-def calc_theta(a_octa, c_octa, max_angle):
-    """
-    Calculate Theta parameter
+def calc_theta(c_octa):
+    """Calculate Theta parameter and value in degree
 
           24
     Θ = sigma < 60 - angle_i >
@@ -135,14 +191,13 @@ def calc_theta(a_octa, c_octa, max_angle):
     where angle_i is an unique angle between two vectors of two twisting face.
     Ref: M. Marchivie et al. Acta Crystal-logr. Sect. B Struct. Sci. 2005, 61, 25.
 
-    :param a_octa: list - atom labels of octahedral structure
-    :param c_octa: array - coordinate of octahedral structure
-    :param max_angle: float - maximum individual cis angle
-
-    :return theta_mean: float - mean Theta value
-    :return face_data: list - atomic labels and coordinates of 8 faces
+    :param c_octa: atomic coordinates of octahedral structure
+    :type c_octa: list, array, tuple
+    :return theta_mean: mean Theta value
+    :rtype theta_mean: int, float
     """
-    labels = list(a_octa[1:])
+    c_octa = np.asarray(c_octa)
+
     ligands = list(c_octa[1:])
 
     _M = c_octa[0]
@@ -167,6 +222,10 @@ def calc_theta(a_octa, c_octa, max_angle):
     # Determine the order of atoms in complex #
     ###########################################
 
+    _, trans_angle = calc_bond_angle(c_octa)
+
+    max_angle = trans_angle[0]
+
     def_change = 6
     for n in range(6):  # This loop is used to identify which N is in line with N1
         test = linear.angle_btw_2vec(ligands_vec[0], ligands_vec[n])
@@ -174,6 +233,7 @@ def calc_theta(a_octa, c_octa, max_angle):
             def_change = n
 
     test_max = 0
+    new_change = 0
     for n in range(6):
         test = linear.angle_btw_2vec(ligands_vec[0], ligands_vec[n])
         if test > test_max:
@@ -187,9 +247,9 @@ def calc_theta(a_octa, c_octa, max_angle):
     ligands[4] = ligands[def_change]
     ligands[def_change] = tp
 
-    tp = labels[4]
-    labels[4] = labels[def_change]
-    labels[def_change] = tp
+    # tp = labels[4]
+    # labels[4] = labels[def_change]
+    # labels[def_change] = tp
 
     N1 = ligands[0]
     N2 = ligands[1]
@@ -228,9 +288,9 @@ def calc_theta(a_octa, c_octa, max_angle):
     ligands[5] = ligands[def_change]  # swapping of the atom (n+1) just identified above with N6
     ligands[def_change] = tp
 
-    tp = labels[5]
-    labels[5] = labels[def_change]
-    labels[def_change] = tp
+    # tp = labels[5]
+    # labels[5] = labels[def_change]
+    # labels[def_change] = tp
 
     # the new numbering of atoms is stored into the N1 - N6 lists
     N1 = ligands[0]
@@ -269,9 +329,9 @@ def calc_theta(a_octa, c_octa, max_angle):
     ligands[3] = ligands[def_change]  # swapping of the atom (n+1) just identified above with N4
     ligands[def_change] = tp
 
-    tp = labels[3]
-    labels[3] = labels[def_change]
-    labels[def_change] = tp
+    # tp = labels[3]
+    # labels[3] = labels[def_change]
+    # labels[def_change] = tp
 
     # the new numbering of atoms is stored into the N1 - N6 lists.
     N1 = ligands[0]
@@ -294,7 +354,7 @@ def calc_theta(a_octa, c_octa, max_angle):
     # loop over 8 faces
     for proj in range(8):
         # Find the equation of the plane
-        a, b, c, d = plane.find_eq_of_plane(N1, N2, N3)
+        a, b, c, d = linear.find_eq_of_plane(N1, N2, N3)
         eqOfPlane.append([a, b, c, d])
 
         # Calculation of projection of M, N4, N5 and N6 onto the plane defined by N1, N2, N3
@@ -319,18 +379,19 @@ def calc_theta(a_octa, c_octa, max_angle):
         else:
             crossDirect = np.cross(VTh3, VTh1)
 
-        theta1 = linear.angle_btw_2vec_sign(VTh1, VTh4, crossDirect)
-        theta2 = linear.angle_btw_2vec_sign(VTh4, VTh2, crossDirect)
-        theta3 = linear.angle_btw_2vec_sign(VTh2, VTh5, crossDirect)
-        theta4 = linear.angle_btw_2vec_sign(VTh5, VTh3, crossDirect)
-        theta5 = linear.angle_btw_2vec_sign(VTh3, VTh6, crossDirect)
-        theta6 = linear.angle_btw_2vec_sign(VTh6, VTh1, crossDirect)
+        theta1 = linear.angles_sign(VTh1, VTh4, crossDirect)
+        theta2 = linear.angles_sign(VTh4, VTh2, crossDirect)
+        theta3 = linear.angles_sign(VTh2, VTh5, crossDirect)
+        theta4 = linear.angles_sign(VTh5, VTh3, crossDirect)
+        theta5 = linear.angles_sign(VTh3, VTh6, crossDirect)
+        theta6 = linear.angles_sign(VTh6, VTh1, crossDirect)
 
         indiTheta.append([theta1, theta2, theta3, theta4, theta5, theta6])
 
+        collectTheta = [theta1, theta2, theta3, theta4, theta5, theta6]
+
         # sum individual Theta for 1 projection plane
-        sumTheta = abs(theta1 - 60) + abs(theta2 - 60) + abs(theta3 - 60) + \
-                   abs(theta4 - 60) + abs(theta5 - 60) + abs(theta6 - 60)
+        sumTheta = sum(abs(collectTheta[i] - 60) for i in range(6))
 
         # update Theta into allTheta list
         allTheta.append(sumTheta)
@@ -341,11 +402,11 @@ def calc_theta(a_octa, c_octa, max_angle):
         N6 = N3
         N3 = tp
 
-        tp = labels[1]
-        labels[1] = labels[3]
-        labels[3] = labels[5]
-        labels[5] = labels[2]
-        labels[2] = tp
+        # tp = labels[1]
+        # labels[1] = labels[3]
+        # labels[3] = labels[5]
+        # labels[5] = labels[2]
+        # labels[2] = tp
 
         # if the variable proj = 3, Octahedral face permutation face N1N2N3 switches to N1N4N2
         # then to N1N6N4 then N1N3N6 then back to N1N2N3
@@ -359,15 +420,15 @@ def calc_theta(a_octa, c_octa, max_angle):
             tp = N3
             N3 = N4
             N4 = tp
-            tp = labels[0]
-            labels[0] = labels[4]
-            labels[4] = tp
-            tp = labels[1]
-            labels[1] = labels[5]
-            labels[5] = tp
-            tp = labels[2]
-            labels[2] = labels[3]
-            labels[3] = tp
+            # tp = labels[0]
+            # labels[0] = labels[4]
+            # labels[4] = tp
+            # tp = labels[1]
+            # labels[1] = labels[5]
+            # labels[5] = tp
+            # tp = labels[2]
+            # labels[2] = labels[3]
+            # labels[3] = tp
 
         # End of the loop that calculate the 8 projections.
 
@@ -411,28 +472,25 @@ def calc_theta(a_octa, c_octa, max_angle):
     return theta_mean
 
 
-def calc_all(a_octa, c_octa):
+def calc_all(c_octa):
+    """Calculate all distortion parameters:
+
+    Zeta, Delta, Sigma, and Theta_mean parameters
+
+    :param c_octa: atomic coordinates of octahedral structure
+    :type c_octa: list, array, tuple
+    :return zeta: Zeta parameters
+    :return delta: Delta parameters
+    :return sigma: Sigma parameters
+    :return theta: Theta parameters
+    :rtype zeta: int, float
+    :rtype delta: int, float
+    :rtype sigma: int, float
+    :rtype theta: int, float
     """
-    Calculate D_mean, Zeta, Delta, Sigma, and Theta parameters
+    zeta = calc_zeta(c_octa)
+    delta = calc_delta(c_octa)
+    sigma = calc_sigma(c_octa)
+    theta = calc_theta(c_octa)
 
-    :param a_octa: list - atom labels of octahedral structure
-    :param c_octa: array - coordinate of octahedral structure
-
-    :return all_zeta: list - computed zeta
-    :return all_delta: list - computed delta
-    :return all_sigma: list - computed sigma
-    :return all_theta: list - computed theta
-    :return all_face: list - 8 faces of octahedral structures
-    """
-    # Convert tuple or list to array
-    c_octa = np.asarray(c_octa)
-
-    # Calculate distortion parameters
-    d_mean, bond_dist = calc_d_mean(c_octa)
-    zeta = calc_zeta(d_mean, bond_dist)
-    delta = calc_delta(d_mean, bond_dist)
-    sigma, max_angle = calc_sigma(c_octa)
-    theta = calc_theta(a_octa, c_octa, max_angle)
-
-    return d_mean, zeta, delta, sigma, theta
-
+    return zeta, delta, sigma, theta
