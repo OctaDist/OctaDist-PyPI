@@ -100,7 +100,7 @@ zeta, delta, sigma, theta = calc.calc_all(coor)
 
 Then print all computed parameters:
 
-```python
+```shell
 Computed parameters
 -------------------
 Zeta  = 0.228072561
