@@ -1,22 +1,20 @@
 ![Python version][Py-ver-badge]
 [![PyPI-Server][PyPI-badge]][PyPI-link]
-[![Conda-Server][Conda-badge]][Conda-link]
 ![Python Wheel][Py-wheel-badge]
-[![Travis-CI Test][Travis-badge]][Travis-link]
 ![Code size][Code-size]
 ![Repo size][Repo-size]
+
+[![Travis-CI Test][Travis-badge]][Travis-link]
 
 
 [Py-ver-badge]: https://img.shields.io/pypi/pyversions/octadist.svg
 [PyPI-badge]: https://img.shields.io/pypi/v/octadist.svg
 [PyPI-link]: https://pypi.org/project/octadist/
-[Conda-badge]: https://anaconda.org/rangsiman/octadist/badges/version.svg
-[Conda-link]: https://anaconda.org/rangsiman/octadist
 [Py-wheel-badge]: https://img.shields.io/pypi/wheel/octadist.svg
-[Travis-badge]: https://img.shields.io/travis/OctaDist/OctaDist-PyPI/master.svg
-[Travis-link]: https://travis-ci.org/OctaDist/OctaDist-PyPI
 [Code-size]: https://img.shields.io/github/languages/code-size/OctaDist/OctaDist-PyPI.svg
 [Repo-size]: https://img.shields.io/github/repo-size/OctaDist/OctaDist-PyPI.svg
+[Travis-badge]: https://img.shields.io/travis/OctaDist/OctaDist-PyPI/master.svg
+[Travis-link]: https://travis-ci.org/OctaDist/OctaDist-PyPI
 
 ## OctaDist
 
@@ -64,7 +62,7 @@ All details of OctaDist is available at [user manual](https://octadist.github.io
 
 Prepare two lists of atomic symbols and atomic coordinates, the latter can be stored in array:
 
-```
+```python
 atom = ['Fe', 'O', 'O', 'N', 'N', 'N', 'N']
 
 coor = [[2.298354000, 5.161785000, 7.971898000],  # <- Metal center atom
@@ -78,13 +76,13 @@ coor = [[2.298354000, 5.161785000, 7.971898000],  # <- Metal center atom
 
 Import necessary module for computing the octahedral distortion parameters, called `calc`:
 
-```
+```python
 from octadist import calc
 ```
 
 Then calculate all parameters separately, for example:
 
-```
+```python
 d_bond = octadist.calc_d_bond(coor)         # Bond distance
 d_mean = octadist.calc_d_mean(coor)         # Mean distance
 zeta = octadist.calc_zeta(coor)             # Zeta
@@ -96,13 +94,13 @@ theta = octadist.calc_theta(atom, coor)     # Theta
 
 or calculate them at once:
 
-```
+```python
 zeta, delta, sigma, theta = calc.calc_all(coor)
 ```
 
 Then print all computed parameters:
 
-```
+```python
 Computed parameters
 -------------------
 Zeta  = 0.228072561
