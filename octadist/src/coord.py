@@ -134,7 +134,7 @@ def extract_octa(a_full, c_full, m_index=1):
     dist_list = []
 
     for i in range(len(a_full)):
-        dist = linear.distance_bwn_points(c_metal[metal_index], c_full[i])
+        dist = linear.euclidean_dist(c_metal[metal_index], c_full[i])
         dist_list.append([a_full[i], c_full[i], dist])
 
     dist_list.sort(key=itemgetter(2))  # sort list of tuples by distance in ascending order

@@ -21,22 +21,25 @@ from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 from octadist.src import elements, tools, plane, projection
 
 
-def all_atom(acf):
+def all_atom(fal, fcl, save="not_save"):
     """
     Display 3D structure of octahedral complex with label for each atoms.
 
     Parameters
     ----------
-    acf : list
-        Atomic labels and coordinates of full complex.
+    fal : list
+        Atomic labels of full complex.
+    fcl : list
+        Atomic coordinates of full complex.
+    save : str
+        Name of image file to save. If this argument is not set by user,
+        do not save a figure as image.
 
     Returns
     -------
     None : None
 
     """
-    fal, fcl = acf[0]
-
     fig = plt.figure()
     ax = Axes3D(fig)
     # ax = fig.add_subplot(111, projection='3d')
@@ -92,27 +95,33 @@ def all_atom(acf):
 
     # plt.axis('equal')
 
+    if save != "not_save":
+        plt.savefig('{0}.png'.format(save))
+
     plt.show()
 
 
-def all_atom_and_face(acf, aco):
+def all_atom_and_face(fal, fcl, co, save="not_save"):
     """
     Display 3D structure of octahedral complex with label for each atoms.
 
     Parameters
     ----------
-    acf : list
-        Atomic labels and coordinates of full complex.
-    aco : list
-        Atomic labels and coordinates of octahedral structure.
+    fal : list
+        Atomic labels of full complex.
+    fcl : list
+        Atomic coordinates of full complex.
+    co : list
+        Atomic coordinates of octahedral structure.
+    save : str
+        Name of image file to save. If this argument is not set by user,
+        do not save a figure as image.
 
     Returns
     -------
     None : None
 
     """
-    fal, fcl = acf[0]
-
     fig = plt.figure()
     ax = Axes3D(fig)
 
@@ -128,27 +137,24 @@ def all_atom_and_face(acf, aco):
                    s=elements.check_radii(n) * 300)
 
     # Draw 8 faces
-    # loop over octahedral structures
-    for n in range(len(aco)):
-        # Get atomic coordinates of octahedron
-        _, _, _, coord = aco[n]
-        _, c_ref, _, _ = tools.find_faces_octa(coord)
+    # Get atomic coordinates of octahedron
+    _, c_ref, _, _ = tools.find_faces_octa(co)
 
-        # Create array of vertices for 8 faces
-        vertices_list = []
-        for i in range(8):
-            get_vertices = c_ref[i].tolist()
-            x, y, z = zip(*get_vertices)
-            vertices = [list(zip(x, y, z))]
-            vertices_list.append(vertices)
+    # Create array of vertices for 8 faces
+    vertices_list = []
+    for i in range(8):
+        get_vertices = c_ref[i].tolist()
+        x, y, z = zip(*get_vertices)
+        vertices = [list(zip(x, y, z))]
+        vertices_list.append(vertices)
 
-        # Added faces
-        color_list = ["red", "blue", "green", "yellow",
-                      "violet", "cyan", "brown", "grey"]
-        for i in range(len(vertices_list)):
-            ax.add_collection3d(Poly3DCollection(vertices_list[i],
-                                                 alpha=0.5,
-                                                 color=color_list[i]))
+    # Added faces
+    color_list = ["red", "blue", "green", "yellow",
+                  "violet", "cyan", "brown", "grey"]
+    for i in range(len(vertices_list)):
+        ax.add_collection3d(Poly3DCollection(vertices_list[i],
+                                             alpha=0.5,
+                                             color=color_list[i]))
 
     # Calculate distance
     bond_list = tools.find_bonds(fal, fcl)
@@ -190,25 +196,31 @@ def all_atom_and_face(acf, aco):
 
     # plt.axis('equal')
 
+    if save != "not_save":
+        plt.savefig('{0}.png'.format(save))
+
     plt.show()
 
 
-def octa(aco):
+def octa(ao, co, save="not_save"):
     """
     Display 3D structure of octahedral complex.
 
     Parameters
     ----------
-    aco : list
-        Atomic labels and coordinates of octahedral structure.
+    ao : list
+        Atomic labels of octahedral structure.
+    co : list
+        Atomic coordinates of octahedral structure.
+    save : str
+        Name of image file to save. If this argument is not set by user,
+        do not save a figure as image.
 
     Returns
     -------
     None : None
 
     """
-    _, _, ao, co = aco[0]
-
     fig = plt.figure()
     ax = Axes3D(fig)
 
@@ -254,25 +266,31 @@ def octa(aco):
 
     # plt.axis('equal')
 
+    if save != "not_save":
+        plt.savefig('{0}.png'.format(save))
+
     plt.show()
 
 
-def octa_and_face(aco):
+def octa_and_face(ao, co, save="not_save"):
     """
     Display 3D structure of octahedral complex with 8 faces.
 
     Parameters
     ----------
-    aco : list
-        Atomic labels and coordinates of octahedral structure.
+    ao : list
+        Atomic labels of octahedral structure.
+    co : list
+        Atomic coordinates of octahedral structure.
+    save : str
+        Name of image file to save. If this argument is not set by user,
+        do not save a figure as image.
 
     Returns
     -------
     None : None
 
     """
-    _, _, ao, co = aco[0]
-
     fig = plt.figure()
     ax = Axes3D(fig)
 
@@ -288,27 +306,24 @@ def octa_and_face(aco):
                    s=elements.check_radii(n) * 300)
 
     # Draw 8 faces
-    # loop over octahedral structures
-    for n in range(len(aco)):
-        # Get atomic coordinates of octahedron
-        _, _, _, coord = aco[n]
-        _, c_ref, _, _ = tools.find_faces_octa(coord)
+    # Get atomic coordinates of octahedron
+    _, c_ref, _, _ = tools.find_faces_octa(co)
 
-        # Create array of vertices for 8 faces
-        vertices_list = []
-        for i in range(8):
-            get_vertices = c_ref[i].tolist()
-            x, y, z = zip(*get_vertices)
-            vertices = [list(zip(x, y, z))]
-            vertices_list.append(vertices)
+    # Create array of vertices for 8 faces
+    vertices_list = []
+    for i in range(8):
+        get_vertices = c_ref[i].tolist()
+        x, y, z = zip(*get_vertices)
+        vertices = [list(zip(x, y, z))]
+        vertices_list.append(vertices)
 
-        # Added faces
-        color_list = ["red", "blue", "green", "yellow",
-                      "violet", "cyan", "brown", "grey"]
-        for i in range(len(vertices_list)):
-            ax.add_collection3d(Poly3DCollection(vertices_list[i],
-                                                 alpha=0.5,
-                                                 color=color_list[i]))
+    # Added faces
+    color_list = ["red", "blue", "green", "yellow",
+                  "violet", "cyan", "brown", "grey"]
+    for i in range(len(vertices_list)):
+        ax.add_collection3d(Poly3DCollection(vertices_list[i],
+                                             alpha=0.5,
+                                             color=color_list[i]))
 
     # Draw line
     for i in range(1, len(co)):
@@ -341,24 +356,31 @@ def octa_and_face(aco):
 
     # plt.axis('equal')
 
+    if save != "not_save":
+        plt.savefig('{0}.png'.format(save))
+
     plt.show()
 
 
-def proj_planes(aco):
+def proj_planes(ao, co, save="not_save"):
     """
     Display the selected 4 faces of octahedral complex.
 
     Parameters
     ----------
-    aco : list
-        Atomic labels and coordinates of octahedral structure.
+    ao : list
+        Atomic labels of octahedral structure.
+    co : list
+        Atomic coordinates of octahedral structure.
+    save : str
+        Name of image file to save. If this argument is not set by user,
+        do not save a figure as image.
 
     Returns
     -------
     None : None
 
     """
-    _, _, ao, co = aco[0]
     _, c_ref, _, c_oppo = tools.find_faces_octa(co)
 
     # reference face
@@ -429,24 +451,32 @@ def proj_planes(aco):
     fig.subplots_adjust(top=0.25)
 
     plt.tight_layout()
+
+    if save != "not_save":
+        plt.savefig('{0}.png'.format(save))
+
     plt.show()
 
 
-def twisting_faces(aco):
+def twisting_faces(ao, co, save="not_save"):
     """
     Display twisting triangular faces and vector projection.
 
     Parameters
     ----------
-    aco : list
-        Atomic labels and coordinates of octahedral structure.
+    ao : list
+        Atomic labels of octahedral structure.
+    co : list
+        Atomic coordinates of octahedral structure.
+    save : str
+        Name of image file to save. If this argument is not set by user,
+        do not save a figure as image.
 
     Returns
     -------
     None : None
 
     """
-    _, _, ao, co = aco[0]
     _, c_ref, _, c_oppo = tools.find_faces_octa(co)
 
     ref_vertices_list = []
@@ -540,4 +570,8 @@ def twisting_faces(aco):
 
     # plt.legend(bbox_to_anchor=(1.05, 1), loc=2)
     plt.tight_layout()
+
+    if save != "not_save":
+        plt.savefig('{0}.png'.format(save))
+
     plt.show()
