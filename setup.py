@@ -5,7 +5,7 @@
 
 import setuptools
 
-__version__ = "2.5.2.1"
+__version__ = "2.5.3"
 
 with open("README.md", "r", encoding="utf-8") as f:
     long_description = f.read()
@@ -23,15 +23,16 @@ setuptools.setup(
     url="https://octadist.github.io",
     download_url="https://github.com/OctaDist/OctaDist-PyPI/releases",
     project_urls={
-        'Documentation': 'https://octadist.github.io/manual.html',
+        'Documentation': 'https://octadist-pypi.readthedocs.io/en/latest/',
         'Source': 'https://github.com/OctaDist/OctaDist-PyPI',
-        'Tracker': 'https://github.com/OctaDist/OctaDist/issues',
+        'Tracker': 'https://github.com/OctaDist/OctaDist-PyPI/issues',
     },
     packages=setuptools.find_packages(),
     install_requires=[
         'numpy',
         'scipy',
-        'matplotlib'
+        'matplotlib',
+        'rmsd'
     ],
     classifiers=[
         "Programming Language :: Python",
@@ -53,9 +54,11 @@ setuptools.setup(
         "Topic :: Multimedia :: Graphics :: 3D Modeling",
     ],
     keywords=[
-        'octahedral distortion',
-        'crystallography',
         'chemistry'
+        'crystallography',
+        'inorganic chemistry',
+        'coordination complex'
+        'octahedral distortion',
     ],
     python_requires='>=3',
 )

@@ -14,32 +14,38 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-"""
-plot: Plot graph and chart
-"""
-
 from matplotlib import pyplot as plt
 
 
 def plot_zeta_sigma(zeta, sigma):
-    """Relationship plot between Zeta and Sigma parameters
+    """
+    Relationship plot between Zeta and Sigma parameters.
 
-    :param zeta: Zeta parameter
-    :param sigma: Sigma parameter
-    :type zeta: list
-    :type sigma: list
+    Parameters
+    ----------
+    zeta : list
+        List of Zeta parameters.
+    sigma : list
+        List of Sigma parameters.
+
+    Returns
+    -------
+    None : None
+
     """
     ax = plt.subplot()
     for i in range(len(zeta)):
-        ax.scatter(zeta, sigma, label='Complex {0}'.format(i + 1))
+        ax.scatter(zeta, sigma, label=f'Complex {i + 1}')
         ax.text(zeta[i] + 0.2, sigma[i] + 0.2, i + 1, fontsize=9)
 
     # Shrink current axis's height by 10% on the bottom
     box = ax.get_position()
-    ax.set_position([box.x0, box.y0 + box.height * 0.1, box.width, box.height * 0.9])
+    ax.set_position([box.x0, box.y0 + box.height * 0.1,
+                     box.width, box.height * 0.9])
 
     # Put a legend below current axis
-    ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.1), fancybox=True, shadow=True, ncol=5)
+    ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.1),
+              fancybox=True, shadow=True, ncol=5)
 
     plt.title("Relationship plot between $\zeta$ and $\Sigma$")
     plt.xlabel(r'$\zeta$')
@@ -48,24 +54,34 @@ def plot_zeta_sigma(zeta, sigma):
 
 
 def plot_sigma_theta(sigma, theta):
-    """Relationship plot between Sigma and Theta parameters
+    """
+    Relationship plot between Sigma and Theta parameters.
 
-    :param sigma: Sigma parameter
-    :param theta: Theta parameter
-    :type sigma: list
-    :type theta: list
+    Parameters
+    ----------
+    sigma : list
+        List of Sigma parameters.
+    theta : list
+        List of Theta parameters.
+
+    Returns
+    -------
+    None : None
+
     """
     ax = plt.subplot()
     for i in range(len(sigma)):
-        ax.scatter(sigma, theta, label='Complex {0}'.format(i + 1))
+        ax.scatter(sigma, theta, label=f'Complex {i + 1}')
         ax.text(sigma[i] + 0.2, theta[i] + 0.2, i + 1, fontsize=9)
 
     # Shrink current axis's height by 10% on the bottom
     box = ax.get_position()
-    ax.set_position([box.x0, box.y0 + box.height * 0.1, box.width, box.height * 0.9])
+    ax.set_position([box.x0, box.y0 + box.height * 0.1,
+                     box.width, box.height * 0.9])
 
     # Put a legend below current axis
-    ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.1), fancybox=True, shadow=True, ncol=5)
+    ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.1),
+              fancybox=True, shadow=True, ncol=5)
 
     plt.title("Relationship plot between $\Sigma$ and $\Theta$")
     plt.xlabel(r'$\Sigma$')

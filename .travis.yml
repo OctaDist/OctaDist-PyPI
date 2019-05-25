@@ -1,6 +1,6 @@
 language: python
 sudo: yes
-dist: xenial
+dist: bionic
 
 branches:
   only:
@@ -10,8 +10,13 @@ python:
   - "3.7"  # 3.7 development branch
   
 install:
-  # - pip install octadist
-  - pip install -i https://test.pypi.org/simple/ octadist
+  - pip install numpy
+  - pip install scipy
+  - pip install matplotlib
+  - pip install rmsd
+  # - pip install -i https://test.pypi.org/simple/ octadist
+  # - pip install --index-url https://test.pypi.org/simple/ octadist==2.5.2.2
+  - pip install octadist
 
 script:
   - cd example-py
