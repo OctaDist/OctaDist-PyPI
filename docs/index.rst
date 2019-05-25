@@ -16,7 +16,7 @@ spin-state changes from low-spin to high-spin, and vice versa. OctaDist can also
 the metal complex such as perovskite and metal-organic framework (MOF).
 
 - Official homepage: https://octadist.github.io
-- Github repository: https://github.com/OctaDist/OctaDist
+- Github repository: https://github.com/OctaDist/OctaDist-PyPI
 
 Status
 ------

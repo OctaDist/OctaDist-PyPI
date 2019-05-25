@@ -1,10 +1,10 @@
-.. currentmodule:: octadist_gui.src.calc
+.. currentmodule:: octadist.src.calc
 
-=================
-octadist_gui.calc
-=================
+=============
+octadist.calc
+=============
 
-.. automodule:: octadist_gui.src.calc
+.. automodule:: octadist.src.calc
    :members:
    :undoc-members:
    :inherited-members:

@@ -2,71 +2,8 @@
 Installing and Usage
 ====================
 
-OctaDist is a cross-platform software which is available for Windows OS, Linux OS, and macOS; 
-for both 32-bit and 64-bit systems.
-
-Windows
--------
-
-Most of the Windows end-user do not have Python installed on their OS, 
-so we strongly suggest you download a ready-to-use OctaDist (GUI version) on your system.
-
-For first time using OctaDist, you should run it as an administrator with full rights.
-Changing property of program can be completed in a few steps as follows:
-
-1. Download program executable (\*.exe) to your machine.
-2. Right click on program icon and select **Run as administrator**.
-3. Click **Yes**.
-4. Wait program for process until open.
-
-Linux
------
-
-1. Download the source code (*.tar.gz) to your machine, for example, at **Download** directory.
-2. Uncompress the tarball, using **tar**::
-   
-    tar -xzvf OctaDist-*-Linux-x86-64.tar.gz
-
-3. Move to OctaDist root directory, using **cd**::
-
-    cd OctaDist-*-Linux-x86-64
-
-4. Check if your system has all dependencies for OctaDist::
-   
-    python CheckPyModule.py
-    
-5. Execute program as a package (you have to stay outside **octadist_gui** directory)::
-   
-    python -m octadist_gui.main
-   
-
-macOS
------
-
-Installing and running the program on Mac are the same as Linux.
-
-1. Download the source code (*.tar.gz) to your machine, for example, at **`Download`** directory.
-2. Press Command - spacebar to launch Spotlight and type "*Terminal*", then double-click the search result.
-3. Uncompress the tarball, using **tar**::
-   
-    tar -xzvf OctaDist-*-macOS-x86-64.tar.gz
-   
-4. Move to OctaDist root directory, using **cd**::
-  
-    cd OctaDist-*-macOS-x86-64
-  
-5. Check if your system has all dependencies for OctaDist::
-  
-    python CheckPyModule.py
-  
-6. Set `TkAgg` backend environment variable to prevent the dependencies error::
-  
-    export MPLBACKEND=TkAgg
-   
-7. Execute program (you have to stay outside **octadist_gui** directory)::
-   
-    python -m octadist_gui.main
-   
+you can use OctaDist on any platform as long as Python 3 and
+require packages (dependencies) are installed.
 
 PyPI
 ----
@@ -107,5 +44,16 @@ It can be installed on system using command::
 The platforms that OctaDist-Conda supported: [![Anaconda-Server Badge][Conda-platform-badge]][Conda-platform-link]
 
 
+Checking
+--------
 
+You can check if the OctaDist is installed correctly, for example:
 
+- Using ``pip``::
+
+    pip search octadist
+
+- Try importing ``octadist`` package::
+
+    import octadist
+    print(octadist.__version__)
