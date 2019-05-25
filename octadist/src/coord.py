@@ -14,10 +14,6 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-"""
-coord: Manipulating atomic labels and atomic coordinates
-"""
-
 from operator import itemgetter
 
 import numpy as np
@@ -26,12 +22,19 @@ from octadist.src import elements, linear
 
 
 def count_line(file):
-    """Count line in input file
+    """
+    Count lines in an input file.
 
-    :param file: absolute path of input file
-    :type file: str
-    :return: number of line in file
-    :rtype: int
+    Parameters
+    ----------
+    file : str
+        Absolute or full path of input file.
+
+    Returns
+    -------
+    i + 1 : int
+        Number of line in file.
+
     """
     with open(file) as f:
         for i, l in enumerate(f):
@@ -42,7 +45,6 @@ def count_line(file):
 
 def find_metal(a_full, c_full):
     """Find and count the metal center atom in complex
-
     :param a_full: full atomic labels of complex
     :param c_full: full atomic coordinates of complex
     :type a_full: list
@@ -68,14 +70,12 @@ def find_metal(a_full, c_full):
 
 def extract_file(f):
     """Extract full atomic symbols and coordinates from input file
-
     **Support file type**::
         - XYZ
         - Gaussian
         - NWChem
         - ORCA
         - Q-Chem
-
     :param f: user input filename
     :type f: str
     :return a_full: full atomic labels of complex
@@ -109,7 +109,6 @@ def extract_file(f):
 
 def extract_octa(a_full, c_full, m_index=1):
     """Extract atomic symbols and coordinates of octahedral structure from full atomic coordinates list
-
     :param a_full: full atomic labels of complex
     :param c_full: full atomic coordinates of complex
     :param m_index: the number of metal center atom - default is 1
@@ -149,11 +148,24 @@ def extract_octa(a_full, c_full, m_index=1):
 
 
 def check_xyz_file(f):
-    """Check if the input file is .xyz file format
+    """
+    Check if the input file is .xyz file format.
 
-    xyz file format
-    ---------------
+    Parameters
+    ----------
+    f : str
+        User input filename.
 
+    Returns
+    -------
+    bool : bool
+        If file is XYZ file, return True.
+
+    Notes
+    -----
+    XYZ file format is like following:
+
+    >>> 
     <number of atom>
     comment
     <index 0> <X> <Y> <Z>
@@ -161,25 +173,21 @@ def check_xyz_file(f):
     ...
     <index 6> <X> <Y> <Z>
 
-    :param f: user input filename
-    :type f: str
-    :return: if the file is .xyz format, return True
-    :rtype: bool
-
-    **Example**
-        7
-        Comment: From Excel file
-        Fe  6.251705    9.063211    5.914842
-        N   8.15961     9.066456    5.463087
-        N   6.749414    10.457551   7.179682
-        N   5.709997    10.492955   4.658257
-        N   4.350474    9.106286    6.356091
-        O   5.789096    7.796326    4.611355
-        O   6.686381    7.763872    7.209699
+    Examples
+    --------
+    >>> example.xyz 
+    7
+    Comment: From Excel file
+    Fe  6.251705    9.063211    5.914842
+    N   8.15961     9.066456    5.463087
+    N   6.749414    10.457551   7.179682
+    N   5.709997    10.492955   4.658257
+    N   4.350474    9.106286    6.356091
+    O   5.789096    7.796326    4.611355
+    O   6.686381    7.763872    7.209699
+    
 
     """
-    # import extract module here to avoid circular dependencies
-
     file = open(f, "r")
 
     first_line = file.readline()
@@ -197,14 +205,21 @@ def check_xyz_file(f):
 
 
 def get_coord_xyz(f):
-    """Get coordinate from .xyz file
+    """
+    Get coordinate from .xyz file.
 
-    :param f: user input filename
-    :type f: str
-    :return a_full: full atomic labels of complex
-    :return c_full: full atomic coordinates of complex
-    :rtype a_full: list
-    :rtype c_full: array
+    Parameters
+    ----------
+    f : str
+        User input filename.
+
+    Returns
+    -------
+    a_full : list
+        Full atomic labels of complex.
+    c_full : array
+        Full atomic coordinates of complex.
+
     """
     file = open(f, "r")
     # read file from 3rd line
@@ -226,15 +241,23 @@ def get_coord_xyz(f):
 
 
 def check_gaussian_file(f):
-    """Check if the input file is Gaussian file format
+    """
+    Check if the input file is Gaussian file format.
 
-    :param f: user input filename
-    :type f: str
-    :return: if file is Gaussian output file, return True
-    :rtype: bool
+    Parameters
+    ----------
+    f : str
+        User input filename.
+
+    Returns
+    -------
+    bool : bool
+        If file is Gaussian output file, return True.
+
     """
     gaussian_file = open(f, "r")
     nline = gaussian_file.readlines()
+
     for i in range(len(nline)):
         if "Standard orientation:" in nline[i]:
             return True
@@ -243,14 +266,36 @@ def check_gaussian_file(f):
 
 
 def get_coord_gaussian(f):
-    """Extract XYZ coordinate from Gaussian output file
+    """
+    Extract XYZ coordinate from Gaussian output file.
 
-    :param f: user input filename
-    :type f: str
-    :return a_full: full atomic labels of complex
-    :return c_full: full atomic coordinates of complex
-    :rtype a_full: list
-    :rtype c_full: array
+    Parameters
+    ----------
+    f : str
+        User input filename.
+
+    Returns
+    -------
+    a_full : list
+        Full atomic labels of complex.
+    c_full : array
+        Full atomic coordinates of complex.
+
+    Examples
+    --------
+    >>> gaussian.log
+                                Standard orientation:
+    ---------------------------------------------------------------------
+    Center     Atomic      Atomic             Coordinates (Angstroms)
+    Number     Number       Type             X           Y           Z
+    ---------------------------------------------------------------------
+         1         26           0        0.000163    1.364285   -0.000039
+         2          8           0        0.684192    0.084335   -1.192008
+         3          8           0       -0.683180    0.083251    1.191173
+         4          7           0        1.639959    1.353157    1.006941
+         5          7           0       -0.563377    2.891083    1.435925
+    ...
+
     """
     gaussian_file = open(f, "r")
     nline = gaussian_file.readlines()
@@ -279,19 +324,29 @@ def get_coord_gaussian(f):
 
     gaussian_file.close()
 
+    c_full = np.asarray(c_full)
+
     return a_full, c_full
 
 
 def check_nwchem_file(f):
-    """Check if the input file is NWChem file format
+    """
+    Check if the input file is NWChem file format.
 
-    :param f: user input filename
-    :type f: str
-    :return: if file is NWChem output file, return True
-    :rtype: bool
+    Parameters
+    ----------
+    f : str
+        User input filename.
+
+    Returns
+    -------
+    bool : bool
+        If file is NWChem output file, return True.
+
     """
     nwchem_file = open(f, "r")
     nline = nwchem_file.readlines()
+
     for i in range(len(nline)):
         if "No. of atoms" in nline[i]:
             if not int(nline[i].split()[4]):
@@ -305,14 +360,38 @@ def check_nwchem_file(f):
 
 
 def get_coord_nwchem(f):
-    """Extract XYZ coordinate from NWChem output file
+    """
+    Extract XYZ coordinate from NWChem output file.
 
-    :param f: user input filename
-    :type f: str
-    :return a_full: full atomic labels of complex
-    :return c_full: full atomic coordinates of complex
-    :rtype a_full: list
-    :rtype c_full: array
+    Parameters
+    ----------
+    f : str
+        User input filename.
+
+    Returns
+    -------
+    a_full : list
+        Full atomic labels of complex.
+    c_full : array
+        Full atomic coordinates of complex.
+
+    Examples
+    --------
+    >>> nwchem.out
+      ----------------------
+      Optimization converged
+      ----------------------
+    ...
+    ...
+     No.       Tag          Charge          X              Y              Z
+    ---- ---------------- ---------- -------------- -------------- --------------
+       1 Ru(Fragment=1)      44.0000    -3.04059115    -0.08558108    -0.07699482
+       2 C(Fragment=1)        6.0000    -1.62704660     2.40971357     0.63980357
+       3 C(Fragment=1)        6.0000    -0.61467778     0.59634595     1.68841986
+       4 C(Fragment=1)        6.0000     0.31519183     1.41684566     2.30745116
+       5 C(Fragment=1)        6.0000     0.28773462     2.80126911     2.08006241
+    ...
+
     """
     nwchem_file = open(f, "r")
     nline = nwchem_file.readlines()
@@ -343,16 +422,25 @@ def get_coord_nwchem(f):
 
     nwchem_file.close()
 
+    c_full = np.asarray(c_full)
+
     return a_full, c_full
 
 
 def check_orca_file(f):
-    """Check if the input file is ORCA file format
+    """
+    Check if the input file is ORCA file format.
 
-    :param f: user input filename
-    :type f: str
-    :return: if file is ORCA output file, return True
-    :rtype: bool
+    Parameters
+    ----------
+    f : str
+        User input filename.
+
+    Returns
+    -------
+    bool : bool
+        If file is ORCA output file, return True.
+
     """
     orca_file = open(f, "r")
     nline = orca_file.readlines()
@@ -364,14 +452,34 @@ def check_orca_file(f):
 
 
 def get_coord_orca(f):
-    """Extract XYZ coordinate from ORCA output file
+    """
+    Extract XYZ coordinate from ORCA output file.
 
-    :param f: user input filename
-    :type f: str
-    :return a_full: full atomic labels of complex
-    :return c_full: full atomic coordinates of complex
-    :rtype a_full: list
-    :rtype c_full: array
+    Parameters
+    ----------
+    f : str
+        User input filename.
+
+    Returns
+    -------
+    a_full : list
+        Full atomic labels of complex.
+    c_full : array
+        Full atomic coordinates of complex.
+
+    Examples
+    --------
+    >>> orca.out
+    ---------------------------------
+    CARTESIAN COORDINATES (ANGSTROEM)
+    ---------------------------------
+      C      0.009657    0.000000    0.005576
+      C      0.009657   -0.000000    1.394424
+      C      1.212436   -0.000000    2.088849
+      C      2.415214    0.000000    1.394425
+      C      2.415214   -0.000000    0.005575
+    ...
+
     """
     orca_file = open(f, "r")
     nline = orca_file.readlines()
@@ -399,20 +507,29 @@ def get_coord_orca(f):
 
     orca_file.close()
 
+    c_full = np.asarray(c_full)
+
     return a_full, c_full
 
 
 def check_qchem_file(f):
-    """Check if the input file is Q-Chem file format
-
-    :param f: user input filename
-    :type f: str
-    :return: if file is Q-Chem output file, return True
-    :rtype: bool
     """
+    Check if the input file is Q-Chem file format.
 
+    Parameters
+    ----------
+    f : str
+        User input filename.
+
+    Returns
+    -------
+    bool : bool
+        If file is Q-Chem output file, return True.
+
+    """
     qchem_file = open(f, "r")
     nline = qchem_file.readlines()
+
     for i in range(len(nline)):
         if "OPTIMIZATION CONVERGED" in nline[i]:
             return True
@@ -421,14 +538,36 @@ def check_qchem_file(f):
 
 
 def get_coord_qchem(f):
-    """Extract XYZ coordinate from Q-Chem output file
+    """
+    Extract XYZ coordinate from Q-Chem output file.
 
-    :param f: user input filename
-    :type f: str
-    :return a_full: full atomic labels of complex
-    :return c_full: full atomic coordinates of complex
-    :rtype a_full: list
-    :rtype c_full: array
+    Parameters
+    ----------
+    f : str
+        User input filename.
+
+    Returns
+    -------
+    a_full : list
+        Full atomic labels of complex.
+    c_full : array
+        Full atomic coordinates of complex.
+
+    Examples
+    --------
+    >>> qchem.out
+    ******************************
+    **  OPTIMIZATION CONVERGED  **
+    ******************************
+                               Coordinates (Angstroms)
+        ATOM                X               Y               Z
+         1  C         0.2681746845   -0.8206222796   -0.3704019386
+         2  C        -1.1809302341   -0.5901746612   -0.6772716414
+         3  H        -1.6636318262   -1.5373167851   -0.9496501352
+         4  H        -1.2829834971    0.0829227646   -1.5389938241
+         5  C        -1.9678565203    0.0191922768    0.5346693165
+    ...
+
     """
     orca_file = open(f, "r")
     nline = orca_file.readlines()
@@ -455,5 +594,7 @@ def get_coord_qchem(f):
         c_full.append([coord_x, coord_y, coord_z])
 
     orca_file.close()
+
+    c_full = np.asarray(c_full)
 
     return a_full, c_full

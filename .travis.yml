@@ -1,6 +1,6 @@
 language: python
 sudo: yes
-dist: xenial
+dist: bionic
 
 branches:
   only:
@@ -13,6 +13,7 @@ install:
   - pip install numpy
   - pip install scipy
   - pip install matplotlib
+  - pip install rmsd
   # - pip install -i https://test.pypi.org/simple/ octadist
   # - pip install --index-url https://test.pypi.org/simple/ octadist==2.5.2.2
   - pip install octadist

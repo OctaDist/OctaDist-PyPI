@@ -15,19 +15,22 @@
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 __author__ = "R. Ketkaew, Y. Tantirungrotechai, D. J. Harding, P. Harding, and M. Marchivie"
+__author_full__ = "Rangsiman Ketkaew, Yuthana Tantirungrotechai, David J. Harding, " \
+                  "Phimphaka Harding, and Mathieu Marchivie"
 __maintainer__ = "Rangsiman Ketkaew"
 __copyright__ = "OctaDist  Copyright (C) 2019  Rangsiman Ketkaew et al."
 __license__ = "GNU v3"
-__credit__ = "OctaDist development team"
+__credit__ = "OctaDist Development Team"
 __email__ = "rangsiman1993@gmail.com"
-__version__ = "2.5.2"
-__revision__ = "2019.252"
+__version__ = "2.5.3"
+__revision__ = "2019.253"
 __release__ = "May 2019"
 __status__ = "stable"
+__title__ = "Octahedral Distortion Calculator"
+__description__ = "OctaDist: A tool for calculating distortion parameters in coordination complexes."
+__doc__ = "https://octadist.github.io/manual.html"
 __website__ = "https://octadist.github.io"
 __github__ = "https://github.com/OctaDist/OctaDist"
-__doc__ = "OctaDist: A tool for calculating distortion parameters in coordination complexes."
-__manual__ = "https://octadist.github.io/manual.html"
 
 __all__ = \
     ['calc',
@@ -45,7 +48,6 @@ __all__ = \
      'calc_bond_angle',
      'calc_sigma',
      'calc_theta',
-     'calc_all',
      'count_line',
      'find_metal',
      'extract_file',
@@ -72,7 +74,8 @@ from .src.calc import calc_delta
 from .src.calc import calc_bond_angle
 from .src.calc import calc_sigma
 from .src.calc import calc_theta
-from .src.calc import calc_all
+from .src.calc import calc_theta_min
+from .src.calc import calc_theta_max
 
 from .src.coord import count_line
 from .src.coord import find_metal
@@ -92,6 +95,8 @@ from .src.coord import get_coord_qchem
 
 from .src.draw import all_atom
 from .src.draw import all_atom_and_face
+from .src.draw import octa
+from .src.draw import octa_and_face
 from .src.draw import proj_planes
 from .src.draw import twisting_faces
 
@@ -100,14 +105,10 @@ from .src.elements import check_radii
 from .src.elements import check_color
 
 from .src.linear import norm_vector
-from .src.linear import distance_bwn_points
-from .src.linear import midpoint_of_line
-from .src.linear import angles_sign
-from .src.linear import angle_btw_2vec
-from .src.linear import angle_btw_3points
 from .src.linear import angle_btw_planes
 from .src.linear import triangle_area
-from .src.linear import find_eq_of_plane
+
+from .src.plane import find_eq_of_plane
 
 from .src.plot import plot_zeta_sigma
 from .src.plot import plot_sigma_theta
@@ -117,3 +118,8 @@ from .src.projection import project_atom_onto_plane
 
 from .src.tools import find_bonds
 from .src.tools import find_faces_octa
+
+from .src.util import calc_fit_plane
+from .src.util import plot_fit_plane
+from .src.util import calc_rmsd
+
