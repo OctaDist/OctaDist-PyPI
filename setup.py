@@ -23,15 +23,16 @@ setuptools.setup(
     url="https://octadist.github.io",
     download_url="https://github.com/OctaDist/OctaDist-PyPI/releases",
     project_urls={
-        'Documentation': 'https://octadist.readthedocs.io/en/v.2.5.3/',
+        'Documentation': 'https://octadist-pypi.readthedocs.io/en/latest/',
         'Source': 'https://github.com/OctaDist/OctaDist-PyPI',
-        'Tracker': 'https://github.com/OctaDist/OctaDist/issues',
+        'Tracker': 'https://github.com/OctaDist/OctaDist-PyPI/issues',
     },
     packages=setuptools.find_packages(),
     install_requires=[
         'numpy',
         'scipy',
-        'matplotlib'
+        'matplotlib',
+        'rmsd'
     ],
     classifiers=[
         "Programming Language :: Python",
