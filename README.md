@@ -57,13 +57,19 @@ Reference document: [HTML][html] | [PDF][pdf] | [Epub][epub]
 
 ## Installing
 
-The easiest way to install OctaDist is `pip` package manager.
+The easiest way to install OctaDist is to use `pip`.
 
 ```sh
 pip install octadist
 ```
 
-Now you should check if `octadist` package is installed correctly.
+or use `conda` for those who have Anaconda installed on your system.
+
+```sh
+conda install -c rangsiman octadist
+```
+
+Now you can check if `octadist` package is installed correctly.
 
 ```python
 import octadist
