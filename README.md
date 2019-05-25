@@ -50,9 +50,9 @@ User document: [Online manual](https://octadist.github.io/manual.html).
 
 Reference document: [HTML][html] | [PDF][pdf] | [Epub][epub]
 
-[html]: https://octadist.readthedocs.io/en/v.2.5.3/ 
-[pdf]: https://readthedocs.org/projects/octadist/downloads/pdf/v.2.5.3/
-[epub]: https://readthedocs.org/projects/octadist/downloads/epub/v.2.5.3/
+[html]: https://octadist-pypi.readthedocs.io/en/latest/ 
+[pdf]: https://readthedocs.org/projects/octadist-pypi/downloads/pdf/latest/
+[epub]: https://readthedocs.org/projects/octadist/downloads/epub/latest/
 
 
 ## Installing
@@ -63,39 +63,33 @@ The easiest way to install OctaDist is `pip` package manager.
 pip install octadist
 ```
 
-## Running the tests
-
-Import `octadist` package which contains a number of modules.
+Now you should check if `octadist` package is installed correctly.
 
 ```python
 import octadist
-```
 
-Then check is OctaDist is installed correctly:
-
-```python
 print(octadist.__version__)     # '2.5.3'
 ```
 
-Prepare list of atomic coordinates of octahedral structure:
+## Running the tests
 
 ```python
-coord = [[2.298354000, 5.161785000, 7.971898000],  # <- Metal center atom
-         [1.885657000, 4.804777000, 6.183726000],
-         [1.747515000, 6.960963000, 7.932784000],
-         [4.094380000, 5.807257000, 7.588689000],
-         [0.539005000, 4.482809000, 8.460004000],
-         [2.812425000, 3.266553000, 8.131637000],
-         [2.886404000, 5.392925000, 9.848966000]]
-```
+import octadist as oc
 
-Then calculate all parameters separately, for example:
+# Prepare list of atomic coordinates of octahedral structure:
 
-```python
-zeta = octadist.calc_zeta(coord)             # Zeta
-delta = octadist.calc_delta(coord)           # Delta
-sigma = octadist.calc_sigma(coord)           # Sigma
-theta = octadist.calc_theta(coord)           # Theta
+coord = [[2.298354000, 5.161785000, 7.971898000],   # <- Metal center atom
+         [1.885657000, 4.804777000, 6.183726000],   # Ligand atom 1
+         [1.747515000, 6.960963000, 7.932784000],   # Ligand atom 2
+         [4.094380000, 5.807257000, 7.588689000],   # Ligand atom 3
+         [0.539005000, 4.482809000, 8.460004000],   # Ligand atom 4
+         [2.812425000, 3.266553000, 8.131637000],   # Ligand atom 5
+         [2.886404000, 5.392925000, 9.848966000]]   # Ligand atom 6
+
+zeta = oc.calc_zeta(coord)             # Zeta
+delta = oc.calc_delta(coord)           # Delta
+sigma = oc.calc_sigma(coord)           # Sigma
+theta = oc.calc_theta(coord)           # Theta
 ```
 
 Example output for computed parameters:
