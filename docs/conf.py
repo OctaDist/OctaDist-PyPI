@@ -121,7 +121,7 @@ html_theme_options = {
 # VCS options: https://docs.readthedocs.io/en/latest/vcs.html#github
 html_context = {
     "display_github": True, # Integrate GitHub
-    "github_user": "octadist", # Username
+    "github_user": "OctaDist", # Username
     "github_repo": "OctaDist-PyPI", # Repo name
     "github_version": "master", # Version
     "conf_py_path": "/", # Path in the checkout to the docs root
@@ -175,7 +175,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'OctaDist.tex', 'OctaDist Documentation',
+    (master_doc, 'OctaDist.tex', 'OctaDist-PyPI Documentation',
      'Rangsiman Ketkaew', 'manual'),
 ]
 
