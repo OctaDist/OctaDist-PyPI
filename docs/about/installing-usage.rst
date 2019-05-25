@@ -24,7 +24,7 @@ The following commands might be useful:
 
    pip install --upgrade octadist
 
-- Upgrade/downgrade to a certain version, for example, version 2.5.1::
+- Upgrade/downgrade to a certain version, for example, version 2.5.3::
 
    pip install --upgrade octadist==2.5.3
 
