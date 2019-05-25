@@ -21,7 +21,7 @@ sys.path.insert(0, os.path.abspath('..'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'OctaDist'
+project = 'OctaDist-PyPI'
 copyright = '2019, Rangsiman Ketkaew et al.'
 author = 'Rangsiman Ketkaew'
 
@@ -122,7 +122,7 @@ html_theme_options = {
 html_context = {
     "display_github": True, # Integrate GitHub
     "github_user": "octadist", # Username
-    "github_repo": "OctaDist", # Repo name
+    "github_repo": "OctaDist-PyPI", # Repo name
     "github_version": "master", # Version
     "conf_py_path": "/", # Path in the checkout to the docs root
 }
@@ -185,7 +185,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'octadist', 'OctaDist Documentation',
+    (master_doc, 'octadist', 'OctaDist-PyPI Documentation',
      [author], 1)
 ]
 
@@ -196,8 +196,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'OctaDist', 'OctaDist Documentation',
-     author, 'OctaDist', 'One line description of project.',
+    (master_doc, 'OctaDist', 'OctaDist-PyPI Documentation',
+     author, 'OctaDist-PyPI', 'One line description of project.',
      'Miscellaneous'),
 ]
 

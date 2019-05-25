@@ -1,5 +1,3 @@
-.. currentmodule:: octadist.src.calc
-
 =============
 octadist.calc
 =============
