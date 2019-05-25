@@ -26,7 +26,7 @@ Please cite this project when you use OctaDist for scientific publication.
 
 Bug report
 ----------
-    For reporting bugs in OctaDist, please submit issues on OctaDist Github.
+    For reporting bugs in OctaDist, please submit issues on OctaDist-PyPI Github.
 
 Project team
 ------------

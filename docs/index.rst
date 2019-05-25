@@ -3,11 +3,14 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-OctaDist Docs
-=============
+OctaDist-PyPI Docs
+==================
 
 **OctaDist: A tool for computing the distortion parameters in coordination complexes.**
 
+.. note::
+   OctaDist-PyPI is a branch of OctaDist program. It is used as command-line interface (CLI).
+   Most of the standard abilities of OctaDist-PyPI is the same as OctaDist GUI version.
 
 OctaDist (**Octa**\hedral **Dist**\ortion calculator) is an inorganic chemistry and crystallography program 
 for computing the distortion parameters, such as distance and angle distortions, in coordination complexes. 
